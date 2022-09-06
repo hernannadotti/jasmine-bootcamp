@@ -2,10 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
 import { IUser } from './models/Iusers';
-import { from, of } from 'rxjs';
-import { ListComponent } from './list/list.component';
-import { ActivatedRoute } from '@angular/router';
-import { SearchBoxService } from './services/search-box.service';
+import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 describe('ApiService', () => {
@@ -31,13 +28,7 @@ describe('ApiService', () => {
     ];
     
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-        {
-          provide: HttpClient,
-          useClass: HttpClientMock
-        }
-      ]
+      imports: [HttpClientTestingModule]
     });
     mockRouter = jasmine.createSpyObj(['navigate']);
     httpClientMock = jasmine.createSpyObj('HttpClient', ['get']);
@@ -64,6 +55,13 @@ describe('ApiService', () => {
     httpClientMock.get.and.returnValue(of(expectedUsers));
     apiService.getUsers().subscribe(value => {
       expect(expectedUsers).toBe(value);
+    })
+  });
+
+  it('get users should be called one time', () => {
+    httpClientMock.get.and.returnValue(of(expectedUsers));
+    apiService.getUsers().subscribe(value => {
+      expect(httpClientMock.get).toHaveBeenCalledTimes(1);
     })
   });
 

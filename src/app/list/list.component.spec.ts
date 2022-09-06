@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { async, ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { ApiService } from '../api.service';
@@ -7,7 +7,6 @@ import { IUser } from '../models/Iusers';
 import { SearchBoxComponent } from '../search-box/search-box.component';
 import { SearchBoxService } from '../services/search-box.service';
 import { ListComponent } from './list.component';
-import { of } from 'rxjs';
 
 describe('ListComponent', () => {
   let component: ListComponent;
