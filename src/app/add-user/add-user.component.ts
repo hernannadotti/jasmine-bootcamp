@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { IUser } from '../models/Iusers';
+import { IUser } from '../models/users';
 import uniqid from 'uniqid';
 
 @Component({
@@ -14,8 +14,8 @@ export class AddUserComponent implements OnInit {
   createUserForm: FormGroup;
   haveToRefresh: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, 
-    private apiService: ApiService, 
+  constructor(private formBuilder: FormBuilder,
+    private apiService: ApiService,
     private router: Router) { }
 
   ngOnInit(): void {

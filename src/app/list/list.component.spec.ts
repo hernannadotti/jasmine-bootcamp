@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { ApiService } from '../api.service';
-import { IUser } from '../models/Iusers';
+import { IUser } from '../models/users';
 import { SearchBoxComponent } from '../search-box/search-box.component';
 import { SearchBoxService } from '../services/search-box.service';
 import { ListComponent } from './list.component';
@@ -26,11 +26,11 @@ describe('ListComponent', () => {
       declarations: [ ListComponent, SearchBoxComponent ],
       imports: [HttpClientModule, MatTableModule],
       providers: [
-        { 
-          provide: ActivatedRoute, 
+        {
+          provide: ActivatedRoute,
           useValue: {
             snapshot: {
-              queryParams: convertToParamMap({ refresh :false }) 
+              queryParams: convertToParamMap({ refresh :false })
             }
           },
         }
@@ -57,8 +57,8 @@ describe('ListComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Users List');
   });
-  
-  it('deleteUsers shoulde be called', () => { 
+
+  it('deleteUsers shoulde be called', () => {
     component.users = USERS;
     mockUsersService.deleteUsers(USERS[1]);
     expect(mockUsersService.deleteUsers).toHaveBeenCalled();

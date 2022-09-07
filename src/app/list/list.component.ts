@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api.service';
-import { IUser } from '../models/Iusers';
+import { IUser } from '../models/users';
+import { LoadingService } from '../services/loading.service';
 import { SearchBoxService } from '../services/search-box.service';
 
 @Component({
@@ -17,12 +18,14 @@ export class ListComponent implements OnInit {
   haveToRefresh: boolean = true;
   displayedColumns: string[] = ['id', 'name', 'username', 'actions'];
   subscriptions: Subscription[] = [];
+  loading: boolean;
 
   constructor(
-    public apiService: ApiService, 
-    private router: Router, 
+    public apiService: ApiService,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private searchBoxService: SearchBoxService
+    private searchBoxService: SearchBoxService,
+    private loadingservice: LoadingService
     ) { }
 
   ngOnInit(): void {
@@ -35,7 +38,7 @@ export class ListComponent implements OnInit {
     }
     this.router.navigate([], {queryParams: {}});
     this.initSubscriptions();
-    
+
   }
 
   ngOndestroy(): void {
@@ -62,17 +65,23 @@ export class ListComponent implements OnInit {
     this.router.navigate(['add'], {queryParams: {refresh: false}});
   }
 
+
+
   initSubscriptions() {
     this.subscriptions.push(this.searchBoxService.getSearchDataObs().subscribe(value => {
       if(!value.name?.length && !value.username?.length) this.filteredDataSource = this.dataSource;
       if(value.name?.length) {
         this.filteredDataSource = this.dataSource.filter((user: any) => user.name.includes(value.name));
       }
-      
+
       if(value.username?.length) {
         this.filteredDataSource = this.dataSource.filter((user: any) => user.username.includes(value.username));
       }
-    }))
+    }));
+
+    this.subscriptions.push(this.loadingservice.loading$.subscribe((value: boolean) => {
+      this.loading = value;
+    }));
   }
 
 }

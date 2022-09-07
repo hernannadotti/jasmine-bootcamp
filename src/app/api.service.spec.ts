@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
-import { IUser } from './models/Iusers';
+import { IUser } from './models/users';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,7 +10,7 @@ describe('ApiService', () => {
   class HttpClientMock {
     get = jasmine.createSpy('httpClient.get');
   }
-  
+
   let apiService: ApiService;
   let expectedUsers: IUser[];
   let mockRouter;
@@ -21,12 +21,12 @@ describe('ApiService', () => {
     mockRouter = {
       navigate: jasmine.createSpy('navigate')
     };
-    
+
     expectedUsers = [
       { id: 101, name: 'Krishna' },
       { id: 102, name: 'Arjun' }
     ];
-    
+
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });

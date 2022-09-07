@@ -1,0 +1,23 @@
+<div class="overlay" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="container" *ngIf="!loading">
+  <div class="row">
+    <div class="col">
+      <div class="card mt-5 px-4 py-2">
+        <div class="card-body" *ngIf="userData">
+          <h5>Name</h5>
+          <p>{{userData.name}}</p>
+          <h5>User Name</h5>
+          <p>{{userData.username}}</p>
+          <h5>Phone</h5>
+          <p>{{userData.phone}}</p>
+          <h5>Web</h5>
+          <p>{{userData.website}}</p>
+          <h5>Email</h5>
+          <p>{{userData.email}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
