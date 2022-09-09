@@ -26,13 +26,31 @@ export class AddUserComponent implements OnInit {
     this.createUserForm = this.formBuilder.group({
       name: '',
       username : '',
+      phone: '',
+      website : '',
+      email: '',
       id: uniqid()
     })
   }
 
   addUser(user: IUser) {
-    this.apiService.addUsers(user);
+    let newItems: any = [];
+    //this.apiService.addUsers(user);
+    let strItems: string | null | undefined = this.getUsersFromLocalStorage();
+    if (strItems?.length) {
+      newItems = JSON.parse(strItems);
+    }
+    newItems.push(user);
+    if(newItems.length) localStorage.setItem('users', JSON.stringify(newItems));
     this.router.navigate(['list'], {queryParams: {refresh: true}})
+  }
+
+  getUsersFromLocalStorage() {
+    let users = localStorage.getItem('users');
+    if(users?.length) {
+      return localStorage.getItem('users');
+    }
+    return
   }
 
 }

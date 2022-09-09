@@ -5,6 +5,7 @@ import { ActivatedRoute, convertToParamMap } from '@angular/router';
 import { ApiService } from '../api.service';
 import { IUser } from '../models/users';
 import { SearchBoxComponent } from '../search-box/search-box.component';
+import { LoadingService } from '../services/loading.service';
 import { SearchBoxService } from '../services/search-box.service';
 import { ListComponent } from './list.component';
 
@@ -14,6 +15,7 @@ describe('ListComponent', () => {
   let mockUsersService: ApiService;
   let mockActivatedRoute: ActivatedRoute;
   let mockSearchBoxService: SearchBoxService;
+  let mockLoadingService: LoadingService;
   let mockRouter;
   let USERS: IUser[];
 
@@ -39,7 +41,7 @@ describe('ListComponent', () => {
     .compileComponents();
     mockRouter = jasmine.createSpyObj(['navigate']);
     mockUsersService = jasmine.createSpyObj(ApiService, ['getUSers', 'deleteUsers'])
-    component = new ListComponent(mockUsersService, mockRouter, mockActivatedRoute, mockSearchBoxService);
+    component = new ListComponent(mockUsersService, mockRouter, mockActivatedRoute, mockSearchBoxService, mockLoadingService);
     fixture = TestBed.createComponent(ListComponent);
     fixture.detectChanges();
     USERS = [

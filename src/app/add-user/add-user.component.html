@@ -4,12 +4,24 @@
             <h1>Add User</h1>
             <form action="" [formGroup]="createUserForm" *ngIf="createUserForm">
                 <div class="form_group mb-3 d-flex flex-column">
-                    <label class="mb-1" for="">Name</label>
-                    <input formControlName="name" type="text">
+                  <label class="mb-1" for="">Name</label>
+                  <input formControlName="name" type="text">
                 </div>
                 <div class="form_group mb-3 d-flex flex-column">
-                    <label class="mb-1" for="">UserName</label>
-                    <input formControlName="username" type="text">
+                  <label class="mb-1" for="">UserName</label>
+                  <input formControlName="username" type="text">
+                </div>
+                <div class="form_group mb-3 d-flex flex-column">
+                  <label class="mb-1" for="">Phone</label>
+                  <input formControlName="phone" type="text">
+                </div>
+                <div class="form_group mb-3 d-flex flex-column">
+                  <label class="mb-1" for="">Website</label>
+                  <input formControlName="website" type="text">
+                </div>
+                <div class="form_group mb-3 d-flex flex-column">
+                  <label class="mb-1" for="">Email</label>
+                  <input formControlName="email" type="text">
                 </div>
                 <button class="mt-5 button btn btn-primary" (click)="addUser(createUserForm.value)">Add</button>
             </form>
