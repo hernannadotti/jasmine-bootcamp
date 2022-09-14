@@ -15,7 +15,6 @@ export class AddUserComponent implements OnInit {
   haveToRefresh: boolean = true;
 
   constructor(private formBuilder: FormBuilder,
-    private apiService: ApiService,
     private router: Router) { }
 
   ngOnInit(): void {

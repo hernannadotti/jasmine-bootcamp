@@ -13,6 +13,9 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import  {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+
 
 
 
@@ -23,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddUserComponent,
     MainNavComponent,
     SearchBoxComponent,
-    ItemDetailComponent
+    ItemDetailComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
+
   ],
   providers: [
     {
