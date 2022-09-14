@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api.service';
+import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
 import { IUser } from '../models/users';
 import { LoadingService } from '../services/loading.service';
 import { SearchBoxService } from '../services/search-box.service';
@@ -25,7 +27,8 @@ export class ListComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private searchBoxService: SearchBoxService,
-    private loadingservice: LoadingService
+    private loadingservice: LoadingService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -79,7 +82,22 @@ export class ListComponent implements OnInit {
     );
   }
 
-  deleteUser(currentUser: IUser): void {
+  openDeleteComponent(currentUser: IUser, enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialogRef = this.dialog.open(ModalDialogComponent,{
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      let type: string = result.target.innerText;
+      if(type === 'Ok') {
+        this.deleteUser(currentUser);
+      }
+    });
+  }
+
+  deleteUser(currentUser: IUser) {
     let storedItems: string | null | any;
     storedItems = localStorage.getItem('users');
     if (storedItems?.length) {
