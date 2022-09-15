@@ -15,6 +15,7 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -38,8 +39,8 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
     ReactiveFormsModule,
     MatTableModule,
     MatProgressSpinnerModule,
-    MatDialogModule
-
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [
     {

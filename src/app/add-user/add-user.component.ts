@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { IUser } from '../models/users';
+import { ITodo } from '../models/todo';
 import uniqid from 'uniqid';
 
 @Component({
@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit {
     })
   }
 
-  addUser(user: IUser) {
+  addUser(user: ITodo) {
     let newItems: any = [];
     //this.apiService.addUsers(user);
     let strItems: string | null | undefined = this.getUsersFromLocalStorage();

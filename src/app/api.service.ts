@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUser } from './models/users';
+import { ITodo } from './models/todo';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  userUrl: string = "https://jsonplaceholder.typicode.com/users";
-  users: IUser[] = [];
+  userUrl: string = "https://jsonplaceholder.typicode.com/todos";
+  todos: ITodo[] = [];
 
   constructor(public http: HttpClient) { }
 
@@ -17,19 +17,19 @@ export class ApiService {
     return this.http.get(this.userUrl);
   }
 
-  setUsers(users: IUser[]) {
-    this.users = users;
+  setTodos(todos: any[]) {
+    this.todos = todos;
   }
 
-  addUsers(user: IUser) {
-    this.users.push(user);
-    return this.users;
+  addUsers(todo: ITodo) {
+    this.todos.push(todo);
+    return this.todos;
   }
 
-  deleteUsers(currentUser: IUser) {
-    this.users = this.users.filter((user: IUser) => user.id !== currentUser.id);
-    this.setUsers(this.users);
-    return this.users;
+  deleteUsers(currentUser: ITodo) {
+    this.todos = this.todos.filter((todo: ITodo) => todo.id !== currentUser.id);
+    this.setTodos(this.todos);
+    return this.todos;
   }
 
   getUser(id: number): Observable<any> {

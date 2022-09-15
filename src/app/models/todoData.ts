@@ -18,14 +18,14 @@
       bs: string;
   }
 
-  export interface IuserData {
-      id: number;
-      name: string;
-      username: string;
-      email: string;
-      address: IAddress;
-      phone: string;
-      website: string;
-      company: ICompany;
+  export interface ITodo {
+      id: number | string;
+      title: string;
+      userId?: number | string;
+      completed: boolean
+  }
+
+  export interface ITodoData {
+    data: any[]
   }
 

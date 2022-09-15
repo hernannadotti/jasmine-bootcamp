@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
-import { IUser } from './models/users';
+import { ITodo } from './models/todo';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,7 +12,7 @@ describe('ApiService', () => {
   }
 
   let apiService: ApiService;
-  let expectedUsers: IUser[];
+  let expectedUsers: ITodo[];
   let mockRouter;
   let httpClientMock: jasmine.SpyObj<HttpClient>;
 

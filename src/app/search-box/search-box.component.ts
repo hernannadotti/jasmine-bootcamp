@@ -3,8 +3,9 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { IsearchData } from '../models/searchData';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SearchBoxService } from '../services/search-box.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search-box',
@@ -14,21 +15,28 @@ import { SearchBoxService } from '../services/search-box.service';
 export class SearchBoxComponent implements OnInit {
   searchQuery$ = new BehaviorSubject<IsearchData>({});
   inputChange$ = new BehaviorSubject('');
-  inputName$: Observable<Event>;
-  inputUserName$: Observable<Event>;
   searchQuery: IsearchData = {};
-  @ViewChild('nameInput') nameInput: ElementRef;
-  @ViewChild('userNameInput') userNameInput: ElementRef;
+  inputTitle$: Observable<Event>;
+  stateForm: FormGroup;
+  @ViewChild('inputTitle') inputTitle: ElementRef;
 
-  constructor(private searchBoxService: SearchBoxService) { }
+  constructor(
+    private searchBoxService: SearchBoxService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.configRadioButtonsForm()
   }
 
   ngAfterViewInit() {
-    this.inputName$ = fromEvent(this.nameInput.nativeElement, 'input');
-    this.inputUserName$ = fromEvent(this.userNameInput.nativeElement, 'input');
+    this.inputTitle$ = fromEvent(this.inputTitle.nativeElement, 'input');
     this.initSubscriptions();
+  }
+
+  configRadioButtonsForm() {
+    this.stateForm = this.formBuilder.group({
+      state: null
+    })
   }
 
   search(event: any) {
@@ -36,15 +44,15 @@ export class SearchBoxComponent implements OnInit {
   }
 
   initSubscriptions() {
-    this.inputName$.pipe(debounceTime(500),distinctUntilChanged()).subscribe((event: any) => {
-      this.searchQuery.name = event?.target?.value;
+    this.inputTitle$.pipe(debounceTime(500),distinctUntilChanged()).subscribe((event: any) => {
+      this.searchQuery.title = event?.target?.value;
       this.searchBoxService.setSearchDataObs(this.searchQuery);
     });
 
-    this.inputUserName$.pipe(debounceTime(500),distinctUntilChanged()).subscribe((event: any) => {
-      this.searchQuery.username = event?.target?.value;
+    this.stateForm.valueChanges.subscribe(value => {
+      this.searchQuery.completed = value.state === 'pending' ? false : true;
       this.searchBoxService.setSearchDataObs(this.searchQuery);
-    });
+    })
   }
 
 }

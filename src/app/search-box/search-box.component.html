@@ -1,14 +1,24 @@
 <div class="row mb-5">
-    <div class="col-6">
+    <div class="col-12 mb-4">
         <div class="search-field">
-            <label for="name">Name</label>
-            <input #nameInput data-field="name" type="text">
+            <label for="name">Title</label>
+            <input #inputTitle data-field="title" type="text">
         </div>
     </div>
     <div class="col-6">
         <div class="search-field">
-            <label for="username">Username</label>
-            <input #userNameInput data-field="username" type="text">
+          <div class="row">
+            <form action="" class="d-flex" [formGroup]="stateForm">
+              <div class="col d-flex">
+                <label for="pending" class="me-4">Pending</label>
+                <input id="pending" name="state" formControlName="state" value="pending" data-field="state" type="radio">
+              </div>
+              <div class="col d-flex">
+                <label for="completed" class="me-4">Completed</label>
+                <input id="completed" name="state" formControlName="state" value="completed" data-field="state" type="radio">
+              </div>
+            </form>
+          </div>
         </div>
     </div>
 </div>
