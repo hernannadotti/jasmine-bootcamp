@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
-import { IuserData } from '../models/userData';
+import { ITodo } from '../models/todoData';
 import { LoadingService } from '../services/loading.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { LoadingService } from '../services/loading.service';
 })
 export class ItemDetailComponent implements OnInit {
   id: number;
-  userData: IuserData;
+  todoData: ITodo;
   loading: boolean = true;
 
   constructor(
@@ -27,8 +27,8 @@ export class ItemDetailComponent implements OnInit {
   }
 
   getUser(id: number) {
-    this.apiService.getUser(id).subscribe((data: IuserData) => {
-      this.userData = data;
+    this.apiService.getUser(id).subscribe((data: ITodo) => {
+      this.todoData = data;
     });
   }
 

@@ -1,4 +1,4 @@
 export interface IsearchData {
-    name?: string,
-    username?: string
+    title?: string,
+    completed?: boolean
 }
