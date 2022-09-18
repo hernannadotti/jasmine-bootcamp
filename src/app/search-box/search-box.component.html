@@ -10,6 +10,10 @@
           <div class="row">
             <form action="" class="d-flex" [formGroup]="stateForm">
               <div class="col d-flex">
+                <label for="pending" class="me-4">All</label>
+                <input id="pending" name="state" formControlName="state" value="all" data-field="state" type="radio">
+              </div>
+              <div class="col d-flex">
                 <label for="pending" class="me-4">Pending</label>
                 <input id="pending" name="state" formControlName="state" value="pending" data-field="state" type="radio">
               </div>

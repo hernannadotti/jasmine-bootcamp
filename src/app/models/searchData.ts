@@ -1,4 +1,4 @@
 export interface IsearchData {
-    title?: string,
-    completed?: boolean
+  title?: string;
+  completed?: boolean | null;
 }

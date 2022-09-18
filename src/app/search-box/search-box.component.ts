@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
-  styleUrls: ['./search-box.component.scss']
+  styleUrls: ['./search-box.component.scss'],
 })
 export class SearchBoxComponent implements OnInit {
   searchQuery$ = new BehaviorSubject<IsearchData>({});
@@ -22,10 +22,11 @@ export class SearchBoxComponent implements OnInit {
 
   constructor(
     private searchBoxService: SearchBoxService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.configRadioButtonsForm()
+    this.configRadioButtonsForm();
   }
 
   ngAfterViewInit() {
@@ -35,8 +36,8 @@ export class SearchBoxComponent implements OnInit {
 
   configRadioButtonsForm() {
     this.stateForm = this.formBuilder.group({
-      state: null
-    })
+      state: null,
+    });
   }
 
   search(event: any) {
@@ -44,15 +45,17 @@ export class SearchBoxComponent implements OnInit {
   }
 
   initSubscriptions() {
-    this.inputTitle$.pipe(debounceTime(500),distinctUntilChanged()).subscribe((event: any) => {
-      this.searchQuery.title = event?.target?.value;
+    this.inputTitle$
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe((event: any) => {
+        this.searchQuery.title = event?.target?.value;
+        this.searchBoxService.setSearchDataObs(this.searchQuery);
+      });
+
+    this.stateForm.valueChanges.subscribe((value) => {
+      this.searchQuery.completed =
+        value.state === 'pending' ? false : value.state === 'all' ? null : true;
       this.searchBoxService.setSearchDataObs(this.searchQuery);
     });
-
-    this.stateForm.valueChanges.subscribe(value => {
-      this.searchQuery.completed = value.state === 'pending' ? false : true;
-      this.searchBoxService.setSearchDataObs(this.searchQuery);
-    })
   }
-
 }
